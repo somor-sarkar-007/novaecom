@@ -991,4 +991,134 @@
 
       updateCartUI();
     })();
+
+    <!-- ========== UNIVERSAL CART & BUY BUTTONS ANIMATION (REUSABLE) ========== -->
+
+  (function() {
+    // ------------------- CUSTOMIZE ANIMATION SPEED (MILLISECONDS) -------------------
+    const CART_ICON_ROTATE_TIME = 500;  
+    const CART_FLASH_TIME = 800;        
+    const BUY_HANDSHAKE_TIME = 800;     
+    // -----------------------------------------------------------------------------
+
+    // All possible cart button classes (add yours if needed)
+    const CART_BTN_SELECTORS = '.add-to-cart, .cart-btn, .add-to-cart-btn, .cart-button';
+    // All possible buy button classes
+    const BUY_BTN_SELECTORS = '.buy-now, .buy-btn, .buy-now-btn, .buy-button';
+
+    function animateCartButton(btn) {
+      const icon = btn.querySelector('i');
+      if (icon) {
+        icon.style.transition = `transform ${CART_ICON_ROTATE_TIME/1000}s ease`;
+        icon.style.transform = 'rotate(360deg) scale(1.2)';
+        setTimeout(() => {
+          if (icon) icon.style.transform = '';
+        }, CART_ICON_ROTATE_TIME);
+      }
+      
+      const flashSpan = document.createElement('span');
+      flashSpan.className = 'cart-added-flash';
+      flashSpan.innerHTML = '✓ Added!';
+      flashSpan.style.position = 'absolute';
+      flashSpan.style.top = '50%';
+      flashSpan.style.left = '50%';
+      flashSpan.style.transform = 'translate(-50%, -50%)';
+      flashSpan.style.backgroundColor = '#22c55e';
+      flashSpan.style.color = 'white';
+      flashSpan.style.padding = '2px 8px';
+      flashSpan.style.borderRadius = '20px';
+      flashSpan.style.fontSize = '10px';
+      flashSpan.style.fontWeight = 'bold';
+      flashSpan.style.whiteSpace = 'nowrap';
+      flashSpan.style.zIndex = '10';
+      flashSpan.style.pointerEvents = 'none';
+      flashSpan.style.animation = `fadeOutUp ${CART_FLASH_TIME/1000}s ease forwards`;
+      btn.style.position = 'relative';
+      btn.appendChild(flashSpan);
+      setTimeout(() => {
+        if (flashSpan) flashSpan.remove();
+      }, CART_FLASH_TIME);
+    }
+
+    function animateBuyButton(btn) {
+      const icon = btn.querySelector('i');
+      if (icon) {
+        const originalIconClass = icon.className;
+        icon.className = 'fas fa-handshake';
+        icon.style.display = 'inline-block';
+        icon.style.animation = `handshakeShake ${BUY_HANDSHAKE_TIME/1000}s ease`;
+        setTimeout(() => {
+          if (icon) {
+            icon.className = originalIconClass;
+            icon.style.animation = '';
+          }
+        }, BUY_HANDSHAKE_TIME);
+      }
+      btn.style.transform = 'scale(0.98)';
+      setTimeout(() => {
+        if (btn) btn.style.transform = '';
+      }, 150);
+    }
+
+    // Attach to all buttons (existing and future)
+    function bindCartButtons() {
+      const cartBtns = document.querySelectorAll(CART_BTN_SELECTORS);
+      cartBtns.forEach(btn => {
+        if (btn.hasAttribute('data-animation-bound')) return;
+        btn.setAttribute('data-animation-bound', 'true');
+        btn.addEventListener('click', () => {
+          setTimeout(() => animateCartButton(btn), 10);
+        });
+      });
+    }
+
+    function bindBuyButtons() {
+      const buyBtns = document.querySelectorAll(BUY_BTN_SELECTORS);
+      buyBtns.forEach(btn => {
+        if (btn.hasAttribute('data-animation-bound')) return;
+        btn.setAttribute('data-animation-bound', 'true');
+        btn.addEventListener('click', () => {
+          setTimeout(() => animateBuyButton(btn), 10);
+        });
+      });
+    }
+
+    // Initially bind
+    bindCartButtons();
+    bindBuyButtons();
+
+    // Optional: observe DOM changes for dynamically added buttons (like after load more)
+    const observer = new MutationObserver(() => {
+      bindCartButtons();
+      bindBuyButtons();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Add CSS keyframes
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeOutUp {
+        0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        100% { opacity: 0; transform: translate(-50%, -80%) scale(0.8); }
+      }
+      @keyframes handshakeShake {
+        0% { transform: rotate(0deg); }
+        25% { transform: rotate(20deg); }
+        50% { transform: rotate(-15deg); }
+        75% { transform: rotate(10deg); }
+        100% { transform: rotate(0deg); }
+      }
+      .cart-added-flash {
+        animation: fadeOutUp 0.5s ease forwards;
+      }
+      .add-to-cart, .cart-btn, .buy-now, .buy-btn {
+        transition: transform 0.1s ease;
+      }
+      .add-to-cart:active, .cart-btn:active, .buy-now:active, .buy-btn:active {
+        transform: scale(0.97);
+      }
+    `;
+    document.head.appendChild(style);
+  })();
+
     </script>
