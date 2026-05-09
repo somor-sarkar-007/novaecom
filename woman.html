@@ -1,0 +1,1468 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>NOVA | Dynamic Cart - Ecommerce Navbar (BDT Tk)</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="icon" type="image/x-icon" href="image/ipho.jpg">
+
+  <style>
+    .mobile-menu-transition {
+      transition: all 0.2s ease-in-out;
+    }
+
+    .hover-scale {
+      transition: transform 0.2s ease;
+    }
+
+    .hover-scale:hover {
+      transform: scale(1.05);
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    .search-slide {
+      max-height: 0;
+      opacity: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, opacity 0.2s ease;
+    }
+
+    .search-slide.open {
+      max-height: 120px;
+      opacity: 1;
+    }
+
+    
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .back-to-top {
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+  }
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  </style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cart-item-remove {
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .cart-item-remove:hover {
+      color: #ef4444;
+    }
+
+  
+  </style>
+</head>
+
+<body class="bg-gray-50 antialiased">
+
+  <!-- Top announcement bar -->
+  <div class="bg-gradient-to-r from-indigo-700 to-indigo-800 text-white text-sm py-2.5 px-4 text-center">
+    <div class="max-w-7xl mx-auto flex flex-wrap items-center justify-center gap-2">
+      <i class="fas fa-truck-fast text-indigo-200 text-base"></i>
+      <span class="font-medium">FREE SHIPPING</span>
+      <span class="hidden sm:inline">on orders above ৳750 •</span>
+      <span class="font-semibold tracking-wide">30-day returns</span>
+      <span class="mx-2 text-indigo-300">|</span>
+      <a href="#" class="underline-offset-2 hover:underline text-indigo-100 flex items-center gap-1">Shop summer sale <i
+          class="fas fa-arrow-right text-xs"></i></a>
+    </div>
+  </div>
+
+  <!-- Main navigation -->
+  <nav class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200/80 shadow-sm transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center py-3 md:py-4">
+        <!-- Logo -->
+        <div class="flex items-center shrink-0">
+          <a href="#" class="flex items-center gap-2 group">
+            <div
+              class="bg-indigo-600 rounded-xl w-8 h-8 flex items-center justify-center shadow-md group-hover:shadow-indigo-200 transition">
+              <i class="fas fa-store text-white text-sm"></i>
+            </div>
+            <span
+              class="text-2xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-700 to-indigo-500">NOVA</span>
+          </a>
+        </div>
+
+        <!-- Desktop Search Bar -->
+        <div class="hidden md:flex flex-1 max-w-xl mx-6 lg:mx-10">
+          <div class="relative w-full group">
+            <i
+              class="fas fa-search absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-indigo-500 transition text-sm"></i>
+            <input type="text" placeholder="Search for products, brands, categories..."
+              class="w-full bg-gray-50 border border-gray-200 rounded-full py-2.5 pl-11 pr-16 text-sm focus:bg-white focus:ring-2 focus:ring-indigo-400 focus:border-transparent transition-all duration-200 shadow-inner">
+            <button
+              class="absolute right-1.5 top-1/2 -translate-y-1/2 bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-1.5 rounded-full transition">
+              Search
+            </button>
+          </div>
+        </div>
+
+        <!-- Right side icons -->
+        <div class="flex items-center gap-4 md:gap-6">
+          <!-- Wishlist (desktop only) -->
+          <a href="#" class="relative text-gray-700 hover:text-indigo-600 transition-colors hidden sm:block">
+            <i class="far fa-heart text-xl"></i>
+            <span
+              class="absolute -top-2 -right-2 bg-gray-200 text-gray-700 text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">0</span>
+          </a>
+
+          <!-- Mobile search icon -->
+          <button id="mobileSearchIcon" class="md:hidden text-gray-700 hover:text-indigo-600 transition-colors text-xl">
+            <i class="fas fa-search"></i>
+          </button>
+
+          <!-- User Account Icon -->
+          <a href="#" class="text-gray-700 hover:text-indigo-600 transition-colors">
+            <i class="far fa-user-circle text-xl"></i>
+          </a>
+
+          <!-- Cart Icon with Dynamic Badge -->
+          <div class="relative group">
+            <a href="#" class="relative text-gray-700 hover:text-indigo-600 transition-colors block">
+              <i class="fas fa-bag-shopping text-xl"></i>
+              <span id="cartBadge"
+                class="absolute -top-2 -right-3 bg-indigo-600 text-white text-[11px] font-bold rounded-full min-w-[20px] h-5 flex items-center justify-center px-1 shadow-sm">0</span>
+            </a>
+            <!-- Mini cart dropdown -->
+            <div id="miniCartDropdown"
+              class="absolute right-0 top-full pt-3 w-80 invisible opacity-0 group-hover:visible group-hover:opacity-100 z-50 transition-all duration-200">
+              <div class="bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border overflow-hidden">
+                <div class="p-4 border-b flex justify-between">
+                  <h4 class="font-bold">Shopping Cart</h4>
+                  <span id="cartItemCount" class="text-xs text-gray-500">0 items</span>
+                </div>
+                <div id="cartItemsList" class="max-h-64 overflow-y-auto">
+                  <div class="p-4 text-center text-gray-400 text-sm">Your cart is empty</div>
+                </div>
+                <div class="p-4 border-t bg-gray-50/50">
+                  <div class="flex justify-between mb-3">
+                    <span class="text-sm">Subtotal</span>
+                    <span id="cartSubtotal" class="font-bold">৳0.00</span>
+                  </div>
+                  <a href="#"
+                    class="block text-center bg-indigo-600 hover:bg-indigo-700 text-white rounded-full py-2.5 text-sm font-semibold transition">Checkout
+                    →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile Hamburger Toggle -->
+          <button id="mobile-menu-toggle"
+            class="md:hidden text-gray-700 focus:outline-none text-2xl hover:text-indigo-600 transition">
+            <i id="mobile-icon" class="fas fa-bars"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Desktop Navigation Links -->
+      <div
+        class="hidden md:flex items-center justify-start space-x-8 py-3 border-t border-gray-100 overflow-x-auto no-scrollbar">
+        <a href="index.html"
+          class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition flex items-center gap-1.5"><i
+            class="fas fa-tag text-xs text-indigo-500"></i> Shop All</a>
+        <a href="deal.html"
+          class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition flex items-center gap-1.5"><i
+            class="fas fa-bolt text-xs text-amber-500"></i> Deals</a>
+        <a href="new.html" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">New Arrivals</a>
+        <a href="man.html" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">Men's Fashion</a>
+        <a href="woman.html" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">Women's Style</a>
+        <a href="#" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">Electronics</a>
+        <a href="#" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">Home & Living</a>
+        <a href="#" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">Sport</a>
+        <a href="#"
+          class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition bg-gray-100 px-3 py-1 rounded-full">⭐
+          Top Rated</a>
+      </div>
+    </div>
+
+    <!-- Mobile Search Slide Panel -->
+    <div id="mobileSearchPanel" class="md:hidden search-slide bg-white border-t border-gray-200 px-4 py-0">
+      <div class="relative my-3">
+        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-sm"></i>
+        <input type="text" id="mobileSearchInput" placeholder="Search products..."
+          class="w-full bg-gray-100 border border-gray-200 rounded-full py-2.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-indigo-300">
+      </div>
+    </div>
+
+    <!-- Mobile Menu Panel (no search inside) -->
+    <div id="mobile-menu-panel" class="md:hidden hidden bg-white border-t border-gray-200 shadow-lg">
+      <div class="px-5 pt-4 pb-6 space-y-5">
+        <div class="flex flex-col space-y-3.5">
+          <a href="index.html"
+            class="text-gray-800 font-medium flex items-center gap-3 text-base py-1 border-b border-gray-50"><i
+              class="fas fa-store text-indigo-500 w-5"></i> Shop All</a>
+          <a href="deal.html" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
+              class="fas fa-fire text-orange-400 w-5"></i> Today's Deals</a>
+          <a href="man.html" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
+              class="fas fa-shirt w-5 text-gray-500"></i> Men's Fashion</a>
+          <a href="woman.html" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
+              class="fas fa-female w-5 text-pink-500"></i> Women's Fashion</a>
+          <a href="#" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
+              class="fas fa-mobile-alt w-5 text-gray-600"></i> Electronics</a>
+          <a href="#" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
+              class="fas fa-couch w-5 text-amber-700"></i> Home & Living</a>
+          <a href="new.html" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
+              class="fas fa-gem w-5 text-indigo-400"></i> New Arrivals</a>
+          <a href="#" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
+              class="fas fa-shirt w-5 text-gray-500"></i> Sport</a>
+          <a href="#" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
+              class="fas fa-star w-5 text-yellow-500"></i>Top Rated</a>
+        </div>
+        <div class="pt-3 border-t border-gray-200">
+          <div class="grid grid-cols-3 gap-2 text-center">
+            <a href="#"
+              class="flex flex-col items-center gap-1 text-gray-700 hover:text-indigo-600 transition p-2 rounded-xl bg-gray-50"><i
+                class="far fa-heart text-lg"></i><span class="text-xs font-medium">Wishlist</span></a>
+            <a href="#"
+              class="flex flex-col items-center gap-1 text-gray-700 hover:text-indigo-600 transition p-2 rounded-xl bg-gray-50"><i
+                class="far fa-user text-lg"></i><span class="text-xs font-medium">Account</span></a>
+            <a href="#"
+              class="flex flex-col items-center gap-1 text-gray-700 hover:text-indigo-600 transition p-2 rounded-xl bg-gray-50 relative"><i
+                class="fas fa-bag-shopping text-lg"></i><span id="mobileCartCount" class="text-xs font-medium">Cart
+                (0)</span></a>
+          </div>
+        </div>
+        <div class="bg-indigo-50 rounded-xl p-3 flex items-center justify-between mt-1">
+          <div>
+            <p class="text-xs font-semibold text-indigo-800">✨ Members get 10% off</p>
+            <p class="text-[11px] text-indigo-600">Join for free & exclusive deals</p>
+          </div>
+          <i class="fas fa-gem text-indigo-400 text-lg"></i>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+
+ <!-- ========== WOMEN'S COLLECTION (FILTERABLE PRODUCTS) ========== -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 bg-pink-100 text-pink-700 px-5 py-2 rounded-full text-sm font-semibold"><i class="fas fa-female"></i> Women's Collection</div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-3">🌸 Trending for Her</h2>
+        <div class="w-20 h-1 bg-gradient-to-r from-pink-500 to-rose-400 mx-auto mt-3 rounded-full"></div>
+        <p class="text-gray-500 max-w-2xl mx-auto mt-3">Dresses, handbags, beauty & more – curated just for you</p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-2 mb-10">
+        <button class="filter-btn active bg-pink-600 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md transition hover:bg-pink-700" data-category="all">All Products</button>
+        <button class="filter-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold transition" data-category="dresses">👗 Dresses</button>
+        <button class="filter-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold transition" data-category="bags">👜 Bags</button>
+        <button class="filter-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold transition" data-category="beauty">💄 Beauty</button>
+        <button class="filter-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold transition" data-category="footwear">👠 Footwear</button>
+        <button class="filter-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold transition" data-category="accessories">🕶️ Accessories</button>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5" id="womenProductsGrid">
+        <!-- Product 1 - Dress -->
+        <div class="product-card bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="dresses">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1539008835657-9e8e9680c956?w=400&h=500&fit=crop" alt="Floral Dress" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/90 rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-sm"></i></button>
+                <div class="absolute top-2 left-2 bg-pink-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full">-30%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-bold text-gray-800 text-sm break-words">Floral Print Maxi Dress</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1 flex-wrap"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <div class="mt-2 flex flex-wrap items-baseline gap-2">
+                    <span class="text-indigo-600 font-bold text-base">৳1,799</span>
+                    <span class="text-gray-400 line-through text-xs">৳2,599</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-31%</span>
+                </div>
+                <div class="flex gap-2 mt-auto pt-3">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+        <!-- Product 2 - Handbag -->
+        <div class="product-card bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="bags">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=400&h=500&fit=crop" alt="Handbag" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/90 rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-sm"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full">-28%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-bold text-gray-800 text-sm break-words">Designer Leather Tote</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1 flex-wrap"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="mt-2 flex flex-wrap items-baseline gap-2">
+                    <span class="text-indigo-600 font-bold text-base">৳3,299</span>
+                    <span class="text-gray-400 line-through text-xs">৳4,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-34%</span>
+                </div>
+                <div class="flex gap-2 mt-auto pt-3">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+        <!-- Product 3 - Lipstick (Beauty) -->
+        <div class="product-card bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="beauty">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&h=500&fit=crop" alt="Lipstick" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/90 rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-sm"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full">-25%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-bold text-gray-800 text-sm break-words">Matte Lipstick Gift Set</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1 flex-wrap"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <div class="mt-2 flex flex-wrap items-baseline gap-2">
+                    <span class="text-indigo-600 font-bold text-base">৳1,299</span>
+                    <span class="text-gray-400 line-through text-xs">৳1,799</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-28%</span>
+                </div>
+                <div class="flex gap-2 mt-auto pt-3">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+        <!-- Product 4 - Heels (Footwear) -->
+        <div class="product-card bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="footwear">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&h=500&fit=crop" alt="Heels" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/90 rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-sm"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full">-35%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-bold text-gray-800 text-sm break-words">Women's Stiletto Heels</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1 flex-wrap"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="mt-2 flex flex-wrap items-baseline gap-2">
+                    <span class="text-indigo-600 font-bold text-base">৳2,199</span>
+                    <span class="text-gray-400 line-through text-xs">৳3,399</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-35%</span>
+                </div>
+                <div class="flex gap-2 mt-auto pt-3">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+        <!-- Product 5 - Sunglasses (Accessories) -->
+        <div class="product-card bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="accessories">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=500&fit=crop" alt="Sunglasses" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/90 rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-sm"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full">-20%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-bold text-gray-800 text-sm break-words">Polarized Cat-Eye Sunglasses</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1 flex-wrap"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <div class="mt-2 flex flex-wrap items-baseline gap-2">
+                    <span class="text-indigo-600 font-bold text-base">৳1,099</span>
+                    <span class="text-gray-400 line-through text-xs">৳1,399</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-21%</span>
+                </div>
+                <div class="flex gap-2 mt-auto pt-3">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+        <!-- Product 6 - Maxi Dress -->
+        <div class="product-card bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="dresses">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400&h=500&fit=crop" alt="Maxi Dress" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/90 rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-sm"></i></button>
+                <div class="absolute top-2 left-2 bg-pink-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full">-25%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-bold text-gray-800 text-sm break-words">Bohemian Maxi Dress</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1 flex-wrap"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                <div class="mt-2 flex flex-wrap items-baseline gap-2">
+                    <span class="text-indigo-600 font-bold text-base">৳2,099</span>
+                    <span class="text-gray-400 line-through text-xs">৳2,799</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-25%</span>
+                </div>
+                <div class="flex gap-2 mt-auto pt-3">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+        <!-- Product 7 - Perfume (Beauty) -->
+        <div class="product-card bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="beauty">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1592945403244-9b3c8f3d3b2f?w=400&h=500&fit=crop" alt="Perfume" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/90 rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-sm"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full">-15%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-bold text-gray-800 text-sm break-words">Floral Eau de Parfum</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1 flex-wrap"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="mt-2 flex flex-wrap items-baseline gap-2">
+                    <span class="text-indigo-600 font-bold text-base">৳2,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳3,499</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-14%</span>
+                </div>
+                <div class="flex gap-2 mt-auto pt-3">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+        <!-- Product 8 - Crossbody Bag -->
+        <div class="product-card bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="bags">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=400&h=500&fit=crop" alt="Crossbody Bag" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/90 rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-sm"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full">-22%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-bold text-gray-800 text-sm break-words">Mini Crossbody Bag</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1 flex-wrap"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <div class="mt-2 flex flex-wrap items-baseline gap-2">
+                    <span class="text-indigo-600 font-bold text-base">৳1,899</span>
+                    <span class="text-gray-400 line-through text-xs">৳2,399</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-21%</span>
+                </div>
+                <div class="flex gap-2 mt-auto pt-3">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+        <!-- Product 9 - Flats (Footwear) -->
+        <div class="product-card bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="footwear">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1533867617858-e7b97e060509?w=400&h=500&fit=crop" alt="Flats" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/90 rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-sm"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full">-18%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-bold text-gray-800 text-sm break-words">Comfy Ballet Flats</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1 flex-wrap"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="mt-2 flex flex-wrap items-baseline gap-2">
+                    <span class="text-indigo-600 font-bold text-base">৳1,499</span>
+                    <span class="text-gray-400 line-through text-xs">৳1,799</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-17%</span>
+                </div>
+                <div class="flex gap-2 mt-auto pt-3">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+        <!-- Product 10 - Hair Dryer (Beauty) -->
+        <div class="product-card bg-white rounded-2xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="beauty">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1522338140262-f46f5913618a?w=400&h=500&fit=crop" alt="Hair Dryer" class="w-full h-full object-cover transition duration-500 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/90 rounded-full w-8 h-8 flex items-center justify-center shadow-md hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-sm"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[11px] font-bold px-2 py-0.5 rounded-full">-20%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-bold text-gray-800 text-sm break-words">Professional Hair Dryer</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1 flex-wrap"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <div class="mt-2 flex flex-wrap items-baseline gap-2">
+                    <span class="text-indigo-600 font-bold text-base">৳2,499</span>
+                    <span class="text-gray-400 line-through text-xs">৳3,099</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-19%</span>
+                </div>
+                <div class="flex gap-2 mt-auto pt-3">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-center mt-12">
+        <a href="#" class="inline-flex items-center gap-2 bg-pink-600 hover:bg-pink-700 text-white font-semibold px-7 py-3 rounded-full transition shadow-md">Explore Full Collection <i class="fas fa-arrow-right text-sm"></i></a>
+    </div>
+</section>
+
+
+
+<!-- ========== WOMEN'S PREMIUM COLLECTION (10 PRODUCTS, FIXED BUTTONS) ========== -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-8">
+        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-pink-500 text-white px-4 py-1 rounded-full text-xs font-semibold shadow-md">
+            <i class="fas fa-crown"></i> Premium Collection
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-bold text-gray-900 mt-2">✨ Luxury for the Elegant Woman</h2>
+        <div class="w-16 h-0.5 bg-gradient-to-r from-indigo-500 to-pink-400 mx-auto mt-2 rounded-full"></div>
+        <p class="text-gray-500 text-sm max-w-2xl mx-auto mt-2">Experience unparalleled craftsmanship – timeless pieces</p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-5">
+        <!-- Premium 1 - Watch -->
+        <div class="group bg-white rounded-xl shadow hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1523170331521-1d5e7efdd2a5?w=400&h=400&fit=crop" alt="Luxury Watch" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Best Seller</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <div class="flex justify-between items-start gap-1">
+                    <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Diamond Dial Watch</h3>
+                    <div class="flex text-yellow-400 text-[10px]"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-0.5">Limited Edition</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳15,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳22,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-30%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium 2 - Handbag -->
+        <div class="group bg-white rounded-xl shadow hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=400&h=400&fit=crop" alt="Designer Handbag" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-pink-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">New</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <div class="flex justify-between items-start gap-1">
+                    <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Italian Leather Tote</h3>
+                    <div class="flex text-yellow-400 text-[10px]"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-0.5">Genuine Leather</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳6,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳10,499</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-33%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium 3 - Gold Necklace -->
+        <div class="group bg-white rounded-xl shadow hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1515562141207-7a88fb7ce338?w=400&h=400&fit=crop" alt="Gold Necklace" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-amber-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Exclusive</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <div class="flex justify-between items-start gap-1">
+                    <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">18k Gold Plated Necklace</h3>
+                    <div class="flex text-yellow-400 text-[10px]"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-0.5">Hypoallergenic</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳4,499</span>
+                    <span class="text-gray-400 line-through text-xs">৳6,499</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-31%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium 4 - Perfume -->
+        <div class="group bg-white rounded-xl shadow hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1592945403244-9b3c8f3d3b2f?w=400&h=400&fit=crop" alt="Perfume" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Limited</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <div class="flex justify-between items-start gap-1">
+                    <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Oud Royale Perfume</h3>
+                    <div class="flex text-yellow-400 text-[10px]"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-0.5">100ml Extrait</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳9,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳14,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-33%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium 5 - Sunglasses -->
+        <div class="group bg-white rounded-xl shadow hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400&h=400&fit=crop" alt="Sunglasses" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-indigo-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Trending</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <div class="flex justify-between items-start gap-1">
+                    <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Polarized Aviator</h3>
+                    <div class="flex text-yellow-400 text-[10px]"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-0.5">UV400 Protection</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳3,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳5,499</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-27%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium 6 - Scarf -->
+        <div class="group bg-white rounded-xl shadow hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1601924994987-69e26d50dc26?w=400&h=400&fit=crop" alt="Silk Scarf" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-pink-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Limited</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <div class="flex justify-between items-start gap-1">
+                    <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Cashmere Silk Scarf</h3>
+                    <div class="flex text-yellow-400 text-[10px]"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-0.5">Handcrafted</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳3,499</span>
+                    <span class="text-gray-400 line-through text-xs">৳5,499</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-36%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium 7 - Heels -->
+        <div class="group bg-white rounded-xl shadow hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1543163521-1bf539c55dd2?w=400&h=400&fit=crop" alt="Designer Heels" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-amber-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Exclusive</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <div class="flex justify-between items-start gap-1">
+                    <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Italian Leather Stilettos</h3>
+                    <div class="flex text-yellow-400 text-[10px]"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-0.5">Handcrafted</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳4,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳7,499</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-33%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium 8 - Jewelry Set -->
+        <div class="group bg-white rounded-xl shadow hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1598560917505-7a7e6f2e6b6c?w=400&h=400&fit=crop" alt="Jewelry Set" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Gift Set</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <div class="flex justify-between items-start gap-1">
+                    <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Pearl Earring & Necklace Set</h3>
+                    <div class="flex text-yellow-400 text-[10px]"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-0.5">Freshwater Pearl</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳3,299</span>
+                    <span class="text-gray-400 line-through text-xs">৳4,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-34%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium 9 - Luxury Belt -->
+        <div class="group bg-white rounded-xl shadow hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400&h=400&fit=crop" alt="Designer Belt" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-amber-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Premium</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <div class="flex justify-between items-start gap-1">
+                    <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Designer Leather Belt</h3>
+                    <div class="flex text-yellow-400 text-[10px]"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-0.5">Italian Leather</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳2,499</span>
+                    <span class="text-gray-400 line-through text-xs">৳3,499</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-29%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium 10 - Luxury Clutch -->
+        <div class="group bg-white rounded-xl shadow hover:shadow-md transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1566150905458-1bf1fc113f0d?w=400&h=400&fit=crop" alt="Clutch Bag" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-pink-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Limited</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <div class="flex justify-between items-start gap-1">
+                    <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Evening Clutch Bag</h3>
+                    <div class="flex text-yellow-400 text-[10px]"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-0.5">Crystal Embellished</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳3,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳5,499</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-27%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-8">
+        <a href="#" class="inline-flex items-center gap-1 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2 rounded-full transition shadow-md text-sm">Explore Entire Collection <i class="fas fa-arrow-right text-xs"></i></a>
+    </div>
+</section>
+
+
+<!-- ========== WOMEN'S BEAUTY SECTION (FILTERABLE, FIXED BUTTONS) ========== -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <!-- Section Header -->
+    <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-lg">
+            <i class="fas fa-female"></i> Women's Beauty
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-4">✨ Glow Up Essentials</h2>
+        <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Skincare, Makeup, Haircare & Fragrance – curated for the modern woman</p>
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="flex flex-wrap justify-center gap-2 mb-10">
+        <button class="filter-btn active bg-pink-600 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md transition hover:bg-pink-700" data-category="all">All Products</button>
+        <button class="filter-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold transition" data-category="skincare">💧 Skincare</button>
+        <button class="filter-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold transition" data-category="makeup">💄 Makeup</button>
+        <button class="filter-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold transition" data-category="haircare">💇 Haircare</button>
+        <button class="filter-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold transition" data-category="fragrance">🌸 Fragrance</button>
+    </div>
+
+    <!-- Product Grid (10 products) -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-5" id="beautyGrid">
+        <!-- Product 1 - Vitamin C Serum (Skincare) -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="skincare">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=400&h=400&fit=crop" alt="Vitamin C Serum" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-25%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words">Vitamin C Brightening Serum</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳1,299</span>
+                    <span class="text-gray-400 line-through text-xs">৳1,799</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-28%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 2 - Matte Lipstick (Makeup) -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="makeup">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1586495777744-4413f21062fa?w=400&h=400&fit=crop" alt="Lipstick" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-20%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words">Matte Longstay Lipstick</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳699</span>
+                    <span class="text-gray-400 line-through text-xs">৳899</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-22%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 3 - Hyaluronic Acid Moisturizer (Skincare) -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="skincare">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1556228720-195a672e8a03?w=400&h=400&fit=crop" alt="Moisturizer" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-18%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words">Hyaluronic Acid Moisturizer</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳1,099</span>
+                    <span class="text-gray-400 line-through text-xs">৳1,349</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-19%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 4 - Hair Fall Control Shampoo (Haircare) -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="haircare">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1631729371254-42c2892f0e6e?w=400&h=400&fit=crop" alt="Shampoo" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-15%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words">Hair Fall Control Shampoo</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳799</span>
+                    <span class="text-gray-400 line-through text-xs">৳949</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-16%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 5 - Floral Perfume (Fragrance) -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="fragrance">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1592945403244-9b3c8f3d3b2f?w=400&h=400&fit=crop" alt="Perfume" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-30%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words">Floral Eau de Parfum</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳2,499</span>
+                    <span class="text-gray-400 line-through text-xs">৳3,499</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-29%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 6 - Under Eye Cream (Skincare) -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="skincare">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=400&h=400&fit=crop" alt="Eye Cream" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-12%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words">Caffeine Under Eye Cream</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳949</span>
+                    <span class="text-gray-400 line-through text-xs">৳1,099</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-14%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 7 - Blush Palette (Makeup) -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="makeup">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1512499615852-d1c86a2f2b0b?w=400&h=400&fit=crop" alt="Blush Palette" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-20%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words">Blush & Highlighter Palette</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳1,199</span>
+                    <span class="text-gray-400 line-through text-xs">৳1,499</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-20%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 8 - Hair Serum (Haircare) -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="haircare">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1522338140262-f46f5913618a?w=400&h=400&fit=crop" alt="Hair Serum" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-15%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words">Hair Repair Serum</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳649</span>
+                    <span class="text-gray-400 line-through text-xs">৳799</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-19%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 9 - Body Lotion (Skincare) -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="skincare">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1440557653082-e8e186733eeb?w=400&h=400&fit=crop" alt="Body Lotion" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-10%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words">Shea Butter Body Lotion</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳499</span>
+                    <span class="text-gray-400 line-through text-xs">৳559</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-11%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 10 - Nail Polish Set (Makeup) -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="makeup">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?w=400&h=400&fit=crop" alt="Nail Polish" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-25%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words">Nail Polish Gift Set (6 pcs)</h3>
+                <div class="flex text-yellow-400 text-[10px] mt-1"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i></div>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳899</span>
+                    <span class="text-gray-400 line-through text-xs">৳1,199</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-25%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View All Button -->
+    <div class="text-center mt-10">
+        <a href="#" class="inline-flex items-center gap-2 bg-pink-600 hover:bg-pink-700 text-white font-semibold px-6 py-2.5 rounded-full transition shadow-md">Explore All Beauty <i class="fas fa-arrow-right text-sm"></i></a>
+    </div>
+</section>
+
+
+ <!-- Footer -->
+  <footer class="bg-gray-900 text-gray-300 pt-12 pb-6 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-8 border-b border-gray-800">
+        <div><div class="flex items-center gap-2 mb-4"><div class="bg-indigo-600 rounded-xl w-8 h-8 flex items-center justify-center shadow-md"><i class="fas fa-store text-white text-sm"></i></div><span class="text-2xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-indigo-300">NOVA</span><span class="text-xs font-semibold text-gray-500">market</span></div><p class="text-sm text-gray-400 mb-4 leading-relaxed">Your ultimate destination for daily deals, flash sales, and unbeatable discounts. Save big on top brands every day!</p><div class="flex gap-3"><a href="#" class="bg-gray-800 hover:bg-indigo-600 rounded-full w-8 h-8 flex items-center justify-center transition"><i class="fab fa-facebook-f text-xs"></i></a><a href="#" class="bg-gray-800 hover:bg-indigo-600 rounded-full w-8 h-8 flex items-center justify-center transition"><i class="fab fa-twitter text-xs"></i></a><a href="#" class="bg-gray-800 hover:bg-indigo-600 rounded-full w-8 h-8 flex items-center justify-center transition"><i class="fab fa-instagram text-xs"></i></a><a href="#" class="bg-gray-800 hover:bg-indigo-600 rounded-full w-8 h-8 flex items-center justify-center transition"><i class="fab fa-youtube text-xs"></i></a></div></div>
+        <div><h3 class="text-white font-semibold text-lg mb-4">Quick Links</h3><ul class="space-y-2 text-sm"><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-indigo-400"></i> Today's Deals</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-indigo-400"></i> Flash Sale</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-indigo-400"></i> Clearance</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-indigo-400"></i> New Arrivals</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-indigo-400"></i> Best Sellers</a></li></ul></div>
+        <div><h3 class="text-white font-semibold text-lg mb-4">Support</h3><ul class="space-y-2 text-sm"><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-headset text-indigo-400 text-xs"></i> Help Center</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-truck text-indigo-400 text-xs"></i> Shipping Info</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-undo-alt text-indigo-400 text-xs"></i> Returns & Refunds</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-shield-alt text-indigo-400 text-xs"></i> Privacy Policy</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-file-contract text-indigo-400 text-xs"></i> Terms & Conditions</a></li></ul></div>
+        <div><h3 class="text-white font-semibold text-lg mb-4">Get Deal Alerts</h3><p class="text-sm text-gray-400 mb-3">Subscribe to get exclusive offers & early access to flash sales.</p><form class="flex flex-col sm:flex-row gap-2 mb-4"><input type="email" placeholder="Your email address" class="flex-1 bg-gray-800 border border-gray-700 rounded-full py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"><button class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-full transition whitespace-nowrap">Subscribe</button></form><div class="mt-4"><p class="text-sm text-gray-400 flex items-center gap-2"><i class="fas fa-phone-alt text-indigo-400"></i> +880 1234 567890</p><p class="text-sm text-gray-400 flex items-center gap-2 mt-2"><i class="fas fa-envelope text-indigo-400"></i> deals@dealhunter.com</p><p class="text-sm text-gray-400 flex items-center gap-2 mt-2"><i class="fas fa-map-marker-alt text-indigo-400"></i> Dhaka, Bangladesh</p></div></div>
+      </div>
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 text-sm text-gray-500"><div class="flex gap-3"><i class="fab fa-cc-visa text-2xl"></i><i class="fab fa-cc-mastercard text-2xl"></i><i class="fab fa-cc-amex text-2xl"></i><i class="fab fa-cc-paypal text-2xl"></i><i class="fab fa-apple-pay text-2xl"></i><i class="fas fa-credit-card text-2xl"></i></div><div class="text-center">&copy; 2025 NOVA Market. All rights reserved. | Best deals every day</div><div class="flex gap-4"><a href="#" class="hover:text-indigo-400 transition">Sitemap</a><a href="#" class="hover:text-indigo-400 transition">Accessibility</a></div></div>
+    </div>
+  </footer>
+
+ <button id="backToTopBtn" class="back-to-top fixed bottom-6 right-6 z-50 w-12 h-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center cursor-pointer">
+  <i class="fas fa-chevron-up text-lg"></i>
+</button>
+
+<script>
+        (function () {
+        // ----- CART STATE -----
+        let cart = [];
+
+        const cartBadge = document.getElementById('cartBadge');
+        const cartItemCountSpan = document.getElementById('cartItemCount');
+        const cartItemsListDiv = document.getElementById('cartItemsList');
+        const cartSubtotalSpan = document.getElementById('cartSubtotal');
+        const mobileCartCountSpan = document.getElementById('mobileCartCount');
+
+        function updateCartUI() {
+          const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+          if (cartBadge) cartBadge.innerText = totalQty;
+          if (mobileCartCountSpan) mobileCartCountSpan.innerText = `Cart (${totalQty})`;
+          if (cartItemCountSpan) cartItemCountSpan.innerText = totalQty === 1 ? '1 item' : `${totalQty} items`;
+
+          if (cartItemsListDiv) {
+            if (cart.length === 0) {
+              cartItemsListDiv.innerHTML = '<div class="p-4 text-center text-gray-400 text-sm">Your cart is empty</div>';
+            } else {
+              let itemsHtml = '';
+              cart.forEach(item => {
+                // Format price with Taka symbol and comma for thousands
+                const formattedPrice = `৳${item.price.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                itemsHtml += `
+                <div class="flex items-center gap-3 p-3 hover:bg-gray-50 border-b border-gray-100" data-id="${item.id}">
+                  <div class="w-12 h-12 bg-gray-100 rounded-xl flex items-center justify-center"><i class="fas fa-box-open text-gray-400"></i></div>
+                  <div class="flex-1">
+                    <p class="text-sm font-medium">${escapeHtml(item.name)}</p>
+                    <div class="flex items-center gap-2 mt-1">
+                      <span class="text-indigo-600 text-xs font-semibold">${formattedPrice}</span>
+                      <span class="text-gray-400 text-xs">x ${item.quantity}</span>
+                    </div>
+                  </div>
+                  <i class="fas fa-trash-alt cart-item-remove text-gray-300 hover:text-red-500" data-id="${item.id}"></i>
+                </div>
+              `;
+              });
+              cartItemsListDiv.innerHTML = itemsHtml;
+              document.querySelectorAll('.cart-item-remove').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                  e.stopPropagation();
+                  const id = parseInt(btn.getAttribute('data-id'));
+                  removeFromCart(id);
+                });
+              });
+            }
+          }
+
+          const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+          if (cartSubtotalSpan) cartSubtotalSpan.innerText = `৳${subtotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        }
+
+        function addToCart(productId, name, price) {
+          const existing = cart.find(item => item.id === productId);
+          if (existing) {
+            existing.quantity += 1;
+          } else {
+            cart.push({ id: productId, name: name, price: parseFloat(price), quantity: 1 });
+          }
+          updateCartUI();
+        }
+
+        function removeFromCart(productId) {
+          const index = cart.findIndex(item => item.id === productId);
+          if (index !== -1) {
+            cart.splice(index, 1);
+            updateCartUI();
+          }
+        }
+
+        function escapeHtml(str) {
+          return str.replace(/[&<>]/g, function (m) {
+            if (m === '&') return '&amp;';
+            if (m === '<') return '&lt;';
+            if (m === '>') return '&gt;';
+            return m;
+          });
+        }
+
+
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('mobile-menu-toggle');
+        const mobilePanel = document.getElementById('mobile-menu-panel');
+        const icon = document.getElementById('mobile-icon');
+        if (menuBtn && mobilePanel && icon) {
+          menuBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            const isHidden = mobilePanel.classList.contains('hidden');
+            if (isHidden) {
+              mobilePanel.classList.remove('hidden');
+              icon.classList.remove('fa-bars');
+              icon.classList.add('fa-times');
+              document.body.style.overflow = 'hidden';
+            } else {
+              mobilePanel.classList.add('hidden');
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+              document.body.style.overflow = '';
+            }
+          });
+          mobilePanel.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+              mobilePanel.classList.add('hidden');
+              icon.classList.remove('fa-times');
+              icon.classList.add('fa-bars');
+              document.body.style.overflow = '';
+            });
+          });
+        }
+
+        // Mobile search slide panel
+        const searchIcon = document.getElementById('mobileSearchIcon');
+        const searchPanel = document.getElementById('mobileSearchPanel');
+        if (searchIcon && searchPanel) {
+          searchIcon.addEventListener('click', function (e) {
+            e.preventDefault();
+            searchPanel.classList.toggle('open');
+            if (searchPanel.classList.contains('open')) {
+              const input = document.getElementById('mobileSearchInput');
+              setTimeout(() => input?.focus(), 100);
+            }
+          });
+        }
+
+        // Close mobile menu on resize
+        window.addEventListener('resize', function () {
+          if (window.innerWidth >= 768) {
+            if (mobilePanel && !mobilePanel.classList.contains('hidden')) {
+              mobilePanel.classList.add('hidden');
+              if (icon) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+              }
+              document.body.style.overflow = '';
+            }
+          }
+        });
+
+        updateCartUI();
+      })();
+
+          (function () {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const category = this.getAttribute('data-category');
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-pink-600', 'text-white');
+                    b.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                this.classList.add('active', 'bg-pink-600', 'text-white');
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+
+                productCards.forEach(card => {
+                    if (category === 'all') {
+                        card.style.display = 'flex';
+                    } else {
+                        const cardCategory = card.getAttribute('data-category');
+                        card.style.display = cardCategory === category ? 'flex' : 'none';
+                    }
+                });
+            });
+        });
+    })();    (function () {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const category = this.getAttribute('data-category');
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-pink-600', 'text-white');
+                    b.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                this.classList.add('active', 'bg-pink-600', 'text-white');
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+
+                productCards.forEach(card => {
+                    if (category === 'all') {
+                        card.style.display = 'flex';
+                    } else {
+                        const cardCategory = card.getAttribute('data-category');
+                        card.style.display = cardCategory === category ? 'flex' : 'none';
+                    }
+                });
+            });
+        });
+    })();
+
+        (function () {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function () {
+                const category = this.getAttribute('data-category');
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-pink-600', 'text-white');
+                    b.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                this.classList.add('active', 'bg-pink-600', 'text-white');
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+
+                productCards.forEach(card => {
+                    if (category === 'all') {
+                        card.style.display = 'flex';
+                    } else {
+                        const cardCategory = card.getAttribute('data-category');
+                        card.style.display = cardCategory === category ? 'flex' : 'none';
+                    }
+                });
+            });
+        });
+    })();
+
+
+
+       (function() {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                // Update active button style
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-pink-600', 'text-white');
+                    b.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                this.classList.add('active', 'bg-pink-600', 'text-white');
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+                // Filter products
+                productCards.forEach(card => {
+                    if (category === 'all') {
+                        card.style.display = 'flex';
+                    } else {
+                        const cardCategory = card.getAttribute('data-category');
+                        card.style.display = cardCategory === category ? 'flex' : 'none';
+                    }
+                });
+            });
+        });
+    })();
+       (function() {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+        
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                // Update active button style
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-pink-600', 'text-white');
+                    b.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                this.classList.add('active', 'bg-pink-600', 'text-white');
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+                // Filter products
+                productCards.forEach(card => {
+                    if (category === 'all') {
+                        card.style.display = 'flex';
+                    } else {
+                        const cardCategory = card.getAttribute('data-category');
+                        card.style.display = cardCategory === category ? 'flex' : 'none';
+                    }
+                });
+            });
+        });
+    })();
+
+
+ <!-- ========== UNIVERSAL CART & BUY BUTTONS ANIMATION (REUSABLE) ========== -->
+  (function() {
+    // ------------------- CUSTOMIZE ANIMATION SPEED (MILLISECONDS) -------------------
+    const CART_ICON_ROTATE_TIME = 500;   // আইকন ঘোরার সময় (মি.সে.)
+    const CART_FLASH_TIME = 800;         // "Added!" টেক্সট থাকার সময়
+    const BUY_HANDSHAKE_TIME = 800;      // হ্যান্ডশেক অ্যানিমেশনের সময়
+    // -----------------------------------------------------------------------------
+
+    // All possible cart button classes (add yours if needed)
+    const CART_BTN_SELECTORS = '.add-to-cart, .cart-btn, .add-to-cart-btn, .cart-button';
+    // All possible buy button classes
+    const BUY_BTN_SELECTORS = '.buy-now, .buy-btn, .buy-now-btn, .buy-button';
+
+    function animateCartButton(btn) {
+      const icon = btn.querySelector('i');
+      if (icon) {
+        icon.style.transition = `transform ${CART_ICON_ROTATE_TIME/1000}s ease`;
+        icon.style.transform = 'rotate(360deg) scale(1.2)';
+        setTimeout(() => {
+          if (icon) icon.style.transform = '';
+        }, CART_ICON_ROTATE_TIME);
+      }
+      
+      const flashSpan = document.createElement('span');
+      flashSpan.className = 'cart-added-flash';
+      flashSpan.innerHTML = '✓ Added!';
+      flashSpan.style.position = 'absolute';
+      flashSpan.style.top = '50%';
+      flashSpan.style.left = '50%';
+      flashSpan.style.transform = 'translate(-50%, -50%)';
+      flashSpan.style.backgroundColor = '#22c55e';
+      flashSpan.style.color = 'white';
+      flashSpan.style.padding = '2px 8px';
+      flashSpan.style.borderRadius = '20px';
+      flashSpan.style.fontSize = '10px';
+      flashSpan.style.fontWeight = 'bold';
+      flashSpan.style.whiteSpace = 'nowrap';
+      flashSpan.style.zIndex = '10';
+      flashSpan.style.pointerEvents = 'none';
+      flashSpan.style.animation = `fadeOutUp ${CART_FLASH_TIME/1000}s ease forwards`;
+      btn.style.position = 'relative';
+      btn.appendChild(flashSpan);
+      setTimeout(() => {
+        if (flashSpan) flashSpan.remove();
+      }, CART_FLASH_TIME);
+    }
+
+    function animateBuyButton(btn) {
+      const icon = btn.querySelector('i');
+      if (icon) {
+        const originalIconClass = icon.className;
+        icon.className = 'fas fa-handshake';
+        icon.style.display = 'inline-block';
+        icon.style.animation = `handshakeShake ${BUY_HANDSHAKE_TIME/1000}s ease`;
+        setTimeout(() => {
+          if (icon) {
+            icon.className = originalIconClass;
+            icon.style.animation = '';
+          }
+        }, BUY_HANDSHAKE_TIME);
+      }
+      btn.style.transform = 'scale(0.98)';
+      setTimeout(() => {
+        if (btn) btn.style.transform = '';
+      }, 150);
+    }
+
+    // Attach to all buttons (existing and future)
+    function bindCartButtons() {
+      const cartBtns = document.querySelectorAll(CART_BTN_SELECTORS);
+      cartBtns.forEach(btn => {
+        if (btn.hasAttribute('data-animation-bound')) return;
+        btn.setAttribute('data-animation-bound', 'true');
+        btn.addEventListener('click', () => {
+          setTimeout(() => animateCartButton(btn), 10);
+        });
+      });
+    }
+
+    function bindBuyButtons() {
+      const buyBtns = document.querySelectorAll(BUY_BTN_SELECTORS);
+      buyBtns.forEach(btn => {
+        if (btn.hasAttribute('data-animation-bound')) return;
+        btn.setAttribute('data-animation-bound', 'true');
+        btn.addEventListener('click', () => {
+          setTimeout(() => animateBuyButton(btn), 10);
+        });
+      });
+    }
+
+    // Initially bind
+    bindCartButtons();
+    bindBuyButtons();
+
+    // Optional: observe DOM changes for dynamically added buttons (like after load more)
+    const observer = new MutationObserver(() => {
+      bindCartButtons();
+      bindBuyButtons();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Add CSS keyframes
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeOutUp {
+        0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        100% { opacity: 0; transform: translate(-50%, -80%) scale(0.8); }
+      }
+      @keyframes handshakeShake {
+        0% { transform: rotate(0deg); }
+        25% { transform: rotate(20deg); }
+        50% { transform: rotate(-15deg); }
+        75% { transform: rotate(10deg); }
+        100% { transform: rotate(0deg); }
+      }
+      .cart-added-flash {
+        animation: fadeOutUp 0.5s ease forwards;
+      }
+      .add-to-cart, .cart-btn, .buy-now, .buy-btn {
+        transition: transform 0.1s ease;
+      }
+      .add-to-cart:active, .cart-btn:active, .buy-now:active, .buy-btn:active {
+        transform: scale(0.97);
+      }
+    `;
+    document.head.appendChild(style);
+  })();
+
+
+    //back to top //
+  (function() {
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+    
+    // Smooth scroll to top on click
+    backToTopBtn.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  })();
+</script>
+</body>
+</html>
