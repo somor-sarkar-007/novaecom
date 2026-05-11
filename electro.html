@@ -37,6 +37,24 @@
       max-height: 120px;
       opacity: 1;
     }
+
+
+ .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+  .back-to-top {
+    transition: all 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+  }
+  .back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
   </style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;400;500;600;700&display=swap"
@@ -174,9 +192,9 @@
           class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition flex items-center gap-1.5"><i
             class="fas fa-bolt text-xs text-amber-500"></i> Deals</a>
         <a href="new.html" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">New Arrivals</a>
-        <a href="#" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">Men's Fashion</a>
-        <a href="#" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">Women's Style</a>
-        <a href="#" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">Electronics</a>
+        <a href="man.html" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">Men's Fashion</a>
+        <a href="woman.html" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">Women's Style</a>
+        <a href="electro.html" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">Electronics</a>
         <a href="#" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">Home & Living</a>
         <a href="#" class="text-gray-700 font-medium text-sm hover:text-indigo-600 transition">Sport</a>
         <a href="#"
@@ -203,11 +221,11 @@
               class="fas fa-store text-indigo-500 w-5"></i> Shop All</a>
           <a href="deal.html" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
               class="fas fa-fire text-orange-400 w-5"></i> Today's Deals</a>
-          <a href="#" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
+          <a href="man.html" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
               class="fas fa-shirt w-5 text-gray-500"></i> Men's Fashion</a>
-          <a href="#" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
+          <a href="woman.html" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
               class="fas fa-female w-5 text-pink-500"></i> Women's Fashion</a>
-          <a href="#" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
+          <a href="electro.html" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
               class="fas fa-mobile-alt w-5 text-gray-600"></i> Electronics</a>
           <a href="#" class="text-gray-800 font-medium flex items-center gap-3 text-base py-1"><i
               class="fas fa-couch w-5 text-amber-700"></i> Home & Living</a>
@@ -242,9 +260,578 @@
       </div>
     </div>
   </nav>
+<!-- ========== ELECTRONICS COLLECTION (STARS BELOW NAME) ========== -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 bg-indigo-100 text-indigo-700 px-5 py-2 rounded-full text-sm font-semibold">
+            <i class="fas fa-microchip"></i> Electronics Hub
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-4">⚡ Latest Tech Gear</h2>
+        <div class="w-20 h-1 bg-indigo-600 mx-auto mt-3 rounded-full"></div>
+        <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Smartphones, laptops, audio & accessories – best prices guaranteed</p>
+    </div>
+
+    <div class="flex flex-wrap justify-center gap-2 mb-10">
+        <button class="filter-btn active bg-indigo-600 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md transition hover:bg-indigo-700" data-category="all">All Products</button>
+        <button class="filter-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold transition" data-category="phones">📱 Phones</button>
+        <button class="filter-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold transition" data-category="laptops">💻 Laptops</button>
+        <button class="filter-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold transition" data-category="audio">🎧 Audio</button>
+        <button class="filter-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold transition" data-category="wearables">⌚ Wearables</button>
+        <button class="filter-btn bg-gray-200 text-gray-700 hover:bg-gray-300 px-5 py-2 rounded-full text-sm font-semibold transition" data-category="accessories">🔌 Accessories</button>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-5" id="electronicsGrid">
+        <!-- Product 1 - Smartphone -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="phones">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1598327105666-5b89351aff97?w=400&h=400&fit=crop" alt="Smartphone" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-15%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">5G AI Smartphone</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">128GB | 6.7" Display</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳28,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳33,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-15%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 2 - Laptop -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="laptops">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=400&h=400&fit=crop" alt="Laptop" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-12%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Ultrabook Laptop</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">16GB | 512GB SSD</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳59,990</span>
+                    <span class="text-gray-400 line-through text-xs">৳67,990</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-12%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 3 - Wireless Headphones -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="audio">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=400&fit=crop" alt="Headphones" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-25%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Noise Cancelling Headphones</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">40h Battery | Bluetooth 5.3</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳3,499</span>
+                    <span class="text-gray-400 line-through text-xs">৳4,699</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-25%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 4 - Smart Watch -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="wearables">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&h=400&fit=crop" alt="Smart Watch" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-20%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Smart Watch Ultra</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">GPS | Heart Rate Monitor</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳5,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳7,499</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-20%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 5 - Wireless Earbuds -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="audio">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&h=400&fit=crop" alt="Earbuds" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-30%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">True Wireless Earbuds</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">Noise Isolation | 24h Playtime</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳2,299</span>
+                    <span class="text-gray-400 line-through text-xs">৳3,299</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-30%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 6 - DSLR Camera -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="accessories">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&h=400&fit=crop" alt="Camera" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-10%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">DSLR Camera Kit</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">24.2MP | 18-55mm Lens</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳42,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳47,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-10%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 7 - Gaming Console -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="accessories">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1592155931584-901ac15763e3?w=400&h=400&fit=crop" alt="Gaming Console" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-8%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Gaming Console</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">1TB SSD | Wireless Controller</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳35,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳38,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-8%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 8 - Power Bank -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="accessories">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1609599006353-e629aa8fe1b7?w=400&h=400&fit=crop" alt="Power Bank" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-15%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">20000mAh Power Bank</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">Fast Charging | USB-C</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳1,299</span>
+                    <span class="text-gray-400 line-through text-xs">৳1,499</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-13%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 9 - Bluetooth Speaker -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="audio">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=400&h=400&fit=crop" alt="Speaker" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-22%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Portable Bluetooth Speaker</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">20W | IPX7 Waterproof</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳2,199</span>
+                    <span class="text-gray-400 line-through text-xs">৳2,799</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-21%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product 10 - Tablet -->
+        <div class="product-card bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full" data-category="tablets">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1589739900243-4b52cd9dd104?w=400&h=400&fit=crop" alt="Tablet" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-18%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Android Tablet</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">10.5" Display | 128GB</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳24,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳29,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-17%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-10">
+        <a href="#" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2.5 rounded-full transition shadow-md">Explore All Electronics <i class="fas fa-arrow-right text-sm"></i></a>
+    </div>
+</section>
 
 
- 
+
+
+
+
+
+
+
+
+<!-- ========== PREMIUM ELECTRONICS COLLECTION (STARS BELOW NAME) ========== -->
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center mb-10">
+        <div class="inline-flex items-center gap-2 bg-gradient-to-r from-amber-500 to-indigo-600 text-white px-5 py-2 rounded-full text-sm font-semibold shadow-md">
+            <i class="fas fa-crown"></i> Premium Collection
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-4">✨ Ultra-Luxury Tech</h2>
+        <div class="w-20 h-1 bg-gradient-to-r from-amber-500 to-indigo-600 mx-auto mt-3 rounded-full"></div>
+        <p class="text-gray-500 mt-2 max-w-2xl mx-auto">Flagship devices – limited edition & premium craftsmanship</p>
+    </div>
+
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-5">
+        <!-- Premium Product 1 - Foldable Phone -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1610945415295-d9bbf067e59c?w=400&h=400&fit=crop" alt="Foldable Phone" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Limited</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Foldable AI Smartphone</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">512GB | 7.6" AMOLED</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳1,19,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳1,49,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-20%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Product 2 - Gaming Laptop RTX 4090 -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=400&h=400&fit=crop" alt="Gaming Laptop" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">-12%</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">RTX 4090 Gaming Laptop</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">32GB RAM | 2TB SSD</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳2,49,990</span>
+                    <span class="text-gray-400 line-through text-xs">৳2,84,990</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-12%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Product 3 - Studio Pro Headphones -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1618366712010-f4ae9c647dcb?w=400&h=400&fit=crop" alt="Studio Headphones" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Best Seller</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Studio Pro Headphones</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">Hi-Res Audio | ANC</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳7,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳11,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-33%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Product 4 - Titanium Smartwatch Ultra -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400&h=400&fit=crop" alt="Luxury Smartwatch" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-indigo-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Titanium</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Titanium Smartwatch Ultra</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">Sapphire Glass | LTE</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳24,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳32,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-24%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Product 5 - Mirrorless Camera Kit -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=400&h=400&fit=crop" alt="Mirrorless Camera" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-amber-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Pro Grade</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Mirrorless Camera Kit</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">45.7MP | 4K 60fps</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳1,79,990</span>
+                    <span class="text-gray-400 line-through text-xs">৳2,19,990</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-18%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Product 6 - Diamond Edition Earbuds -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1606220588913-b3aac6ab1f62?w=400&h=400&fit=crop" alt="Luxury Earbuds" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Limited</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Diamond Edition Earbuds</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">24-bit Audio | Luxury Case</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳9,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳14,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-33%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Product 7 - Mechanical RGB Keyboard -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1595225476474-8756398a212b?w=400&h=400&fit=crop" alt="Mechanical Keyboard" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-indigo-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Custom</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">Mechanical RGB Keyboard</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">Cherry MX | Wireless</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳7,499</span>
+                    <span class="text-gray-400 line-through text-xs">৳9,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-25%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Product 8 - 4K Cinematic Drone -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1507582020474-9a35b7d455d9?w=400&h=400&fit=crop" alt="Drone" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-amber-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">4K HDR</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">4K Cinematic Drone</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">40min Flight | 8km Range</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳59,990</span>
+                    <span class="text-gray-400 line-through text-xs">৳79,990</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-25%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Product 9 - VR Headset Pro -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=400&h=400&fit=crop" alt="VR Headset" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-indigo-600 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Next-Gen</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">VR Headset Pro</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">4K per eye | 120Hz</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳44,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳54,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-18%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Product 10 - 7.1.4 Home Theater System -->
+        <div class="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100 flex flex-col h-full">
+            <div class="relative overflow-hidden bg-gray-100 aspect-square">
+                <img src="https://images.unsplash.com/photo-1545454675-3531b543be5d?w=400&h=400&fit=crop" alt="Home Theater" class="w-full h-full object-cover transition duration-300 group-hover:scale-105">
+                <button class="wishlist absolute top-2 right-2 bg-white/80 rounded-full w-7 h-7 flex items-center justify-center shadow-sm hover:bg-white z-10"><i class="far fa-heart text-indigo-600 text-xs"></i></button>
+                <div class="absolute top-2 left-2 bg-amber-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full">Dolby Atmos</div>
+            </div>
+            <div class="p-3 flex flex-col flex-1">
+                <h3 class="font-semibold text-gray-800 text-sm break-words leading-tight">7.1.4 Home Theater System</h3>
+                <div class="flex text-yellow-400 text-[10px] gap-0.5 mt-1">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="text-gray-400 text-[10px] mt-1">1000W | Wireless Surround</p>
+                <div class="mt-1 flex flex-wrap items-baseline gap-1">
+                    <span class="text-indigo-600 font-bold text-sm">৳89,999</span>
+                    <span class="text-gray-400 line-through text-xs">৳1,19,999</span>
+                    <span class="bg-green-100 text-green-700 text-[9px] font-semibold px-1.5 py-0.5 rounded-full">-25%</span>
+                </div>
+                <div class="flex gap-1.5 mt-auto pt-2">
+                    <button class="cart-btn flex-1 bg-indigo-600 hover:bg-indigo-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-shopping-cart text-[10px] mr-1"></i> Cart</button>
+                    <button class="buy-btn flex-1 bg-emerald-600 hover:bg-emerald-700 text-white text-[11px] font-medium py-1.5 rounded-lg transition"><i class="fas fa-bolt text-[10px] mr-1"></i> Buy</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="text-center mt-10">
+        <a href="#" class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-2.5 rounded-full transition shadow-md">Explore Premium Collection <i class="fas fa-arrow-right text-sm"></i></a>
+    </div>
+</section>
+
+
+ <!-- Footer (same as before) -->
+  <footer class="bg-gray-900 text-gray-300 pt-12 pb-6 mt-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 pb-8 border-b border-gray-800">
+        <div><div class="flex items-center gap-2 mb-4"><div class="bg-indigo-600 rounded-xl w-8 h-8 flex items-center justify-center shadow-md"><i class="fas fa-store text-white text-sm"></i></div><span class="text-2xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-indigo-300">NOVA</span><span class="text-xs font-semibold text-gray-500">market</span></div><p class="text-sm text-gray-400 mb-4 leading-relaxed">Your ultimate destination for daily deals, flash sales, and unbeatable discounts. Save big on top brands every day!</p><div class="flex gap-3"><a href="#" class="bg-gray-800 hover:bg-indigo-600 rounded-full w-8 h-8 flex items-center justify-center transition"><i class="fab fa-facebook-f text-xs"></i></a><a href="#" class="bg-gray-800 hover:bg-indigo-600 rounded-full w-8 h-8 flex items-center justify-center transition"><i class="fab fa-twitter text-xs"></i></a><a href="#" class="bg-gray-800 hover:bg-indigo-600 rounded-full w-8 h-8 flex items-center justify-center transition"><i class="fab fa-instagram text-xs"></i></a><a href="#" class="bg-gray-800 hover:bg-indigo-600 rounded-full w-8 h-8 flex items-center justify-center transition"><i class="fab fa-youtube text-xs"></i></a></div></div>
+        <div><h3 class="text-white font-semibold text-lg mb-4">Quick Links</h3><ul class="space-y-2 text-sm"><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-indigo-400"></i> Today's Deals</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-indigo-400"></i> Flash Sale</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-indigo-400"></i> Clearance</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-indigo-400"></i> New Arrivals</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-chevron-right text-[10px] text-indigo-400"></i> Best Sellers</a></li></ul></div>
+        <div><h3 class="text-white font-semibold text-lg mb-4">Support</h3><ul class="space-y-2 text-sm"><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-headset text-indigo-400 text-xs"></i> Help Center</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-truck text-indigo-400 text-xs"></i> Shipping Info</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-undo-alt text-indigo-400 text-xs"></i> Returns & Refunds</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-shield-alt text-indigo-400 text-xs"></i> Privacy Policy</a></li><li><a href="#" class="hover:text-indigo-400 transition flex items-center gap-2"><i class="fas fa-file-contract text-indigo-400 text-xs"></i> Terms & Conditions</a></li></ul></div>
+        <div><h3 class="text-white font-semibold text-lg mb-4">Get Deal Alerts</h3><p class="text-sm text-gray-400 mb-3">Subscribe to get exclusive offers & early access to flash sales.</p><form class="flex flex-col sm:flex-row gap-2 mb-4"><input type="email" placeholder="Your email address" class="flex-1 bg-gray-800 border border-gray-700 rounded-full py-2 px-4 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 text-white"><button class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-medium px-4 py-2 rounded-full transition whitespace-nowrap">Subscribe</button></form><div class="mt-4"><p class="text-sm text-gray-400 flex items-center gap-2"><i class="fas fa-phone-alt text-indigo-400"></i> +880 1234 567890</p><p class="text-sm text-gray-400 flex items-center gap-2 mt-2"><i class="fas fa-envelope text-indigo-400"></i> deals@dealhunter.com</p><p class="text-sm text-gray-400 flex items-center gap-2 mt-2"><i class="fas fa-map-marker-alt text-indigo-400"></i> Dhaka, Bangladesh</p></div></div>
+      </div>
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 text-sm text-gray-500"><div class="flex gap-3"><i class="fab fa-cc-visa text-2xl"></i><i class="fab fa-cc-mastercard text-2xl"></i><i class="fab fa-cc-amex text-2xl"></i><i class="fab fa-cc-paypal text-2xl"></i><i class="fab fa-apple-pay text-2xl"></i><i class="fas fa-credit-card text-2xl"></i></div><div class="text-center">&copy; 2025 NOVA Market. All rights reserved. | Best deals every day</div><div class="flex gap-4"><a href="#" class="hover:text-indigo-400 transition">Sitemap</a><a href="#" class="hover:text-indigo-400 transition">Accessibility</a></div></div>
+    </div>
+  </footer>
+
+
+  <button id="backToTopBtn" class="back-to-top fixed bottom-6 right-6 z-50 w-12 h-12 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center cursor-pointer">
+  <i class="fas fa-chevron-up text-lg"></i>
+</button>
 
 <script>
         (function () {
@@ -389,6 +976,181 @@
 
         updateCartUI();
       })();
+
+  (function() {
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const productCards = document.querySelectorAll('.product-card');
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const category = this.getAttribute('data-category');
+                filterBtns.forEach(b => {
+                    b.classList.remove('active', 'bg-indigo-600', 'text-white');
+                    b.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                this.classList.add('active', 'bg-indigo-600', 'text-white');
+                this.classList.remove('bg-gray-200', 'text-gray-700');
+                productCards.forEach(card => {
+                    if (category === 'all') {
+                        card.style.display = 'flex';
+                    } else {
+                        const cardCategory = card.getAttribute('data-category');
+                        card.style.display = cardCategory === category ? 'flex' : 'none';
+                    }
+                });
+            });
+        });
+    })();
+
+
+            <!-- ========== UNIVERSAL CART & BUY BUTTONS ANIMATION (REUSABLE) ========== -->
+  (function() {
+    // ------------------- CUSTOMIZE ANIMATION SPEED (MILLISECONDS) -------------------
+    const CART_ICON_ROTATE_TIME = 500;   // আইকন ঘোরার সময় (মি.সে.)
+    const CART_FLASH_TIME = 800;         // "Added!" টেক্সট থাকার সময়
+    const BUY_HANDSHAKE_TIME = 800;      // হ্যান্ডশেক অ্যানিমেশনের সময়
+    // -----------------------------------------------------------------------------
+
+    // All possible cart button classes (add yours if needed)
+    const CART_BTN_SELECTORS = '.add-to-cart, .cart-btn, .add-to-cart-btn, .cart-button';
+    // All possible buy button classes
+    const BUY_BTN_SELECTORS = '.buy-now, .buy-btn, .buy-now-btn, .buy-button';
+
+    function animateCartButton(btn) {
+      const icon = btn.querySelector('i');
+      if (icon) {
+        icon.style.transition = `transform ${CART_ICON_ROTATE_TIME/1000}s ease`;
+        icon.style.transform = 'rotate(360deg) scale(1.2)';
+        setTimeout(() => {
+          if (icon) icon.style.transform = '';
+        }, CART_ICON_ROTATE_TIME);
+      }
+      
+      const flashSpan = document.createElement('span');
+      flashSpan.className = 'cart-added-flash';
+      flashSpan.innerHTML = '✓ Added!';
+      flashSpan.style.position = 'absolute';
+      flashSpan.style.top = '50%';
+      flashSpan.style.left = '50%';
+      flashSpan.style.transform = 'translate(-50%, -50%)';
+      flashSpan.style.backgroundColor = '#22c55e';
+      flashSpan.style.color = 'white';
+      flashSpan.style.padding = '2px 8px';
+      flashSpan.style.borderRadius = '20px';
+      flashSpan.style.fontSize = '10px';
+      flashSpan.style.fontWeight = 'bold';
+      flashSpan.style.whiteSpace = 'nowrap';
+      flashSpan.style.zIndex = '10';
+      flashSpan.style.pointerEvents = 'none';
+      flashSpan.style.animation = `fadeOutUp ${CART_FLASH_TIME/1000}s ease forwards`;
+      btn.style.position = 'relative';
+      btn.appendChild(flashSpan);
+      setTimeout(() => {
+        if (flashSpan) flashSpan.remove();
+      }, CART_FLASH_TIME);
+    }
+
+    function animateBuyButton(btn) {
+      const icon = btn.querySelector('i');
+      if (icon) {
+        const originalIconClass = icon.className;
+        icon.className = 'fas fa-handshake';
+        icon.style.display = 'inline-block';
+        icon.style.animation = `handshakeShake ${BUY_HANDSHAKE_TIME/1000}s ease`;
+        setTimeout(() => {
+          if (icon) {
+            icon.className = originalIconClass;
+            icon.style.animation = '';
+          }
+        }, BUY_HANDSHAKE_TIME);
+      }
+      btn.style.transform = 'scale(0.98)';
+      setTimeout(() => {
+        if (btn) btn.style.transform = '';
+      }, 150);
+    }
+
+    // Attach to all buttons (existing and future)
+    function bindCartButtons() {
+      const cartBtns = document.querySelectorAll(CART_BTN_SELECTORS);
+      cartBtns.forEach(btn => {
+        if (btn.hasAttribute('data-animation-bound')) return;
+        btn.setAttribute('data-animation-bound', 'true');
+        btn.addEventListener('click', () => {
+          setTimeout(() => animateCartButton(btn), 10);
+        });
+      });
+    }
+
+    function bindBuyButtons() {
+      const buyBtns = document.querySelectorAll(BUY_BTN_SELECTORS);
+      buyBtns.forEach(btn => {
+        if (btn.hasAttribute('data-animation-bound')) return;
+        btn.setAttribute('data-animation-bound', 'true');
+        btn.addEventListener('click', () => {
+          setTimeout(() => animateBuyButton(btn), 10);
+        });
+      });
+    }
+
+    // Initially bind
+    bindCartButtons();
+    bindBuyButtons();
+
+    // Optional: observe DOM changes for dynamically added buttons (like after load more)
+    const observer = new MutationObserver(() => {
+      bindCartButtons();
+      bindBuyButtons();
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Add CSS keyframes
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes fadeOutUp {
+        0% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        100% { opacity: 0; transform: translate(-50%, -80%) scale(0.8); }
+      }
+      @keyframes handshakeShake {
+        0% { transform: rotate(0deg); }
+        25% { transform: rotate(20deg); }
+        50% { transform: rotate(-15deg); }
+        75% { transform: rotate(10deg); }
+        100% { transform: rotate(0deg); }
+      }
+      .cart-added-flash {
+        animation: fadeOutUp 0.5s ease forwards;
+      }
+      .add-to-cart, .cart-btn, .buy-now, .buy-btn {
+        transition: transform 0.1s ease;
+      }
+      .add-to-cart:active, .cart-btn:active, .buy-now:active, .buy-btn:active {
+        transform: scale(0.97);
+      }
+    `;
+    document.head.appendChild(style);
+  })();
+
+    //back to top //
+  (function() {
+    const backToTopBtn = document.getElementById('backToTopBtn');
+    
+    // Show/hide button based on scroll position
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 300) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    });
+    
+    // Smooth scroll to top on click
+    backToTopBtn.addEventListener('click', function() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  })();
   
 </script>
 </body>
